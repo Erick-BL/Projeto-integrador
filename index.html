@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allve - Tudo Vegano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #16a34a;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #22c55e;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #16a34a;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #16a34a;
+            border: 2px solid #16a34a;
+        }
+
+        .btn-secondary:hover {
+            background: #16a34a;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-bar {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            outline: none;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6b7280;
+        }
+
+        /* Main Content */
+        main {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            margin-top: 2rem;
+            padding: 3rem 0;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        /* Restaurant Cards */
+        .restaurant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .restaurant-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .restaurant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .restaurant-image {
+            height: 200px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .restaurant-info {
+            padding: 1.5rem;
+        }
+
+        .restaurant-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .restaurant-info p {
+            color: #6b7280;
+            margin-bottom: 1rem;
+        }
+
+        .restaurant-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: #fbbf24;
+        }
+
+        .delivery-time {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        /* Map Section */
+        .map-container {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .category-tag {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: #166534;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 500;
+            border: 1px solid #86efac;
+            transition: all 0.3s ease;
+        }
+
+        .category-tag:hover {
+            background: linear-gradient(135deg, #bbf7d0, #86efac);
+            transform: translateY(-2px);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .close {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #6b7280;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #16a34a;
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #22c55e;
+        }
+
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #22c55e;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .restaurant-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                gap: 0.5rem;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-leaf"></i>
+                Allve
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#restaurants">Restaurantes</a></li>
+                <li><a href="#map">Mapa</a></li>
+                <li><a href="#about">Sobre</a></li>
+            </ul>
+            <div class="user-actions">
+                <button class="btn btn-secondary" onclick="openModal('loginModal')">
+                    <i class="fas fa-user"></i> Entrar
+                </button>
+                <button class="btn btn-primary" onclick="openModal('registerModal')">
+                    <i class="fas fa-user-plus"></i> Cadastrar
+                </button>
+                <button class="btn btn-secondary" onclick="openModal('settingsModal')">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Tudo Vegano, Tudo Aqui!</h1>
+            <p>Descubra os melhores pratos veganos de Uberlândia em um só lugar. Delivery rápido e sustentável.</p>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Busque por restaurantes, pratos ou ingredientes...">
+            </div>
+            <div class="categories">
+                <span class="category-tag">🍔 Burgers</span>
+                <span class="category-tag">🍕 Pizza</span>
+                <span class="category-tag">🥗 Saladas</span>
+                <span class="category-tag">🍜 Pratos Quentes</span>
+                <span class="category-tag">🧃 Sucos</span>
+                <span class="category-tag">🍰 Sobremesas</span>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="container">
+            <section class="section" id="restaurants">
+                <h2>Restaurantes Parceiros</h2>
+                <div class="restaurant-grid">
+                    <div class="restaurant-card">
+                        <div class="restaurant-image">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="restaurant-info">
+                            <h3>Verde Vida</h3>
+                            <p>Especializada em pratos veganos caseiros e naturais</p>
+                            <div class="restaurant-meta">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.8</span>
+                                </div>
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    25-35 min
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Ver Cardápio</button>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card">
+                        <div class="restaurant-image">
+                            <i class="fas fa-pizza-slice"></i>
+                        </div>
+                        <div class="restaurant-info">
+                            <h3>Pizza Plant</h3>
+                            <p>Pizzas veganas artesanais com massa integral</p>
+                            <div class="restaurant-meta">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.6</span>
+                                </div>
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    30-45 min
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Ver Cardápio</button>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card">
+                        <div class="restaurant-image">
+                            <i class="fas fa-carrot"></i>
+                        </div>
+                        <div class="restaurant-info">
+                            <h3>Raízes Saudáveis</h3>
+                            <p>Bowls nutritivos e sucos detox frescos</p>
+                            <div class="restaurant-meta">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.9</span>
+                                </div>
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    15-25 min
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Ver Cardápio</button>
+                        </div>
+                    </div>
+
+                    <div class="restaurant-card">
+                        <div class="restaurant-image">
+                            <i class="fas fa-hamburger"></i>
+                        </div>
+                        <div class="restaurant-info">
+                            <h3>Burger Green</h3>
+                            <p>Hambúrgueres veganos gourmet irresistíveis</p>
+                            <div class="restaurant-meta">
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.7</span>
+                                </div>
+                                <div class="delivery-time">
+                                    <i class="fas fa-clock"></i>
+                                    20-30 min
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">Ver Cardápio</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section" id="map">
+                <h2>Restaurantes em Uberlândia</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59587.66139287805!2d-48.31743734999999!3d-18.918684449999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94a445b04d6109fb%3A0x47ebae74b34b8a52!2sUberl%C3%A2ndia%2C%20MG!5e0!3m2!1spt!2sbr!4v1704904800000!5m2!1spt!2sbr"
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Allve</h3>
+                    <p>Conectando você aos melhores sabores veganos de Uberlândia</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <a href="#home">Início</a>
+                    <a href="#restaurants">Restaurantes</a>
+                    <a href="#map">Mapa</a>
+                    <a href="#about">Sobre</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Contato</h3>
+                    <a href="mailto:contato@allve.com">Allve@gmail.com</a>
+                    <a href="tel:+5534999999999">(34) 99734-3985</a>
+                </div>
+            </div>
+            <p>&copy; 2025 Allve. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Entrar</h2>
+                <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Criar Conta</h2>
+                <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="name">Nome Completo</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Criar Conta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Configurações</h2>
+                <span class="close" onclick="closeModal('settingsModal')">&times;</span>
+            </div>
+            <form>
+                <div class="form-group">
+                    <label for="notifications">Notificações</label>
+                    <select id="notifications">
+                        <option value="all">Todas</option>
+                        <option value="important">Apenas importantes</option>
+                        <option value="none">Nenhuma</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="delivery-radius">Raio de Entrega (km)</label>
+                    <input type="range" id="delivery-radius" min="1" max="20" value="5">
+                    <span id="radius-value">5 km</span>
+                </div>
+                <div class="form-group">
+                    <label for="dietary-restrictions">Restrições Alimentares</label>
+                    <select id="dietary-restrictions">
+                        <option value="none">Nenhuma</option>
+                        <option value="gluten-free">Sem Glúten</option>
+                        <option value="nut-free">Sem Nozes</option>
+                        <option value="soy-free">Sem Soja</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Salvar Configurações</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let modal of modals) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
+
+        // Range slider update
+        const radiusSlider = document.getElementById('delivery-radius');
+        const radiusValue = document.getElementById('radius-value');
+        
+        if (radiusSlider && radiusValue) {
+            radiusSlider.addEventListener('input', function() {
+                radiusValue.textContent = this.value + ' km';
+            });
+        }
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-bar input');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const restaurantCards = document.querySelectorAll('.restaurant-card');
+                
+                restaurantCards.forEach(card => {
+                    const restaurantName = card.querySelector('h3').textContent.toLowerCase();
+                    const restaurantDesc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (restaurantName.includes(searchTerm) || restaurantDesc.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = searchTerm === '' ? 'block' : 'none';
+                    }
+                });
+            });
+        }
+
+        // Category filtering
+        const categoryTags = document.querySelectorAll('.category-tag');
+        categoryTags.forEach(tag => {
+            tag.addEventListener('click', function() {
+                // Remove active class from all tags
+                categoryTags.forEach(t => t.classList.remove('active'));
+                // Add active class to clicked tag
+                this.classList.add('active');
+                
+                // Filter restaurants based on category
+                const category = this.textContent.toLowerCase();
+                const restaurantCards = document.querySelectorAll('.restaurant-card');
+                
+                restaurantCards.forEach(card => {
+                    const restaurantName = card.querySelector('h3').textContent.toLowerCase();
+                    const restaurantDesc = card.querySelector('p').textContent.toLowerCase();
+                    
+                    if (category.includes('burger') && (restaurantName.includes('burger') || restaurantDesc.includes('burger'))) {
+                        card.style.display = 'block';
+                    } else if (category.includes('pizza') && (restaurantName.includes('pizza') || restaurantDesc.includes('pizza'))) {
+                        card.style.display = 'block';
+                    } else if (category.includes('saladas') && (restaurantName.includes('salad') || restaurantDesc.includes('bowl'))) {
+                        card.style.display = 'block';
+                    } else if (category.includes('sucos') && (restaurantName.includes('suco') || restaurantDesc.includes('detox'))) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submissions
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Funcionalidade em desenvolvimento! Em breve estará disponível.');
+            });
+        });
+
+        // Restaurant card interactions
+        document.querySelectorAll('.restaurant-card .btn-primary').forEach(button => {
+            button.addEventListener('click', function() {
+                const restaurantName = this.closest('.restaurant-card').querySelector('h3').textContent;
+                alert(`Abrindo cardápio do ${restaurantName}...`);
+            });
+        });
+        
+    </script>
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+          <div class="vw-plugin-top-wrapper"></div>
+        </div>
+      </div>
+      <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+      <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+      </script>
+</body>
+</html>
